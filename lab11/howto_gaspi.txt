@@ -1,0 +1,130 @@
+# ================================================================
+#
+#   WFiIS - laboratorium programowania równoległego GASPI/GPI-2
+#
+# ================================================================
+
+#        Uruchamianie aplikacji Fraunhofer GASPI/GPI-2
+#        na stacjach w pracowni komputerowej 204 (D-10).
+
+
+# ------------- Przygotowanie środowiska  ------------------------
+
+# 1. Załadować zmienne środowiskowe do bieżącej powłoki Bash.
+#    skrypt dla pakietu GASPI/GPI-2 (z obsługą MPICH):
+
+ source /opt/nfs/config/source_mpich411.sh
+ source /opt/nfs/config/source_gaspi.sh
+
+
+# ------------- Kompilacja kompilatorem MPICH --------------------
+
+# 2. Skompilować program GASPI za pomocą kompilatora MPI C:
+
+ mpicc gaspi_source.c -o program_gaspi \
+        -I${GPI_INC_DIR} -L${GPI_LIB_DIR} -lGPI2 -lpthread
+
+# lub (z pomocniczymi plikami test_utils.* i biblioteką mat.):
+
+ mpicc gaspi_source.c test_utils.c -o program_gaspi \
+    -I. -I${GPI_INC_DIR} -L${GPI_LIB_DIR} -lGPI2 -lpthread -lm
+
+# ------------------ Wykonanie programu --------------------------
+
+# 3. Przygotować plik z listą dostępnych węzłów, np. "nodes":
+
+ /opt/nfs/config/station204_name_list.sh 1 16 > nodes
+
+# 4. Uruchomić skompilowany program GASPI - transport via SSH
+
+ gaspi_run -h
+
+Usage: gaspi_run -m  [OPTIONS]
+
+Available options:
+  -b  Use a different binary for first node (master).
+  -N               Enable NUMA for processes on same node.
+  -n        Start as many  from machine file.
+  -d               Run with GDB (debugger) on master node.
+  -p               Ping hosts before starting binary.
+  -h               This help.
+
+ # Uwaga. Wersje GPI >= 1.5 zawierają błąd przekazywania zmiennych
+ # środowiskowych. Należy użyć dodatkowy sktypt: gaspi_wrapper.sh
+
+ gaspi_run -m nodes -n 8 $GPI_BIN_DIR/gaspi_wrapper.sh $(pwd)/program_gaspi
+
+
+# ----------------------------------------------------------------
+
+# 5. Przykładowe uruchomienie programu:
+#    (Liczba węzłów w pliku konfiguracji klastra nie może być mniejsza
+#     od liczby uruchamianych procesów; węzły mogą się powtarzać.)
+
+ cat nodes
+stud204-01
+stud204-01
+stud204-02
+stud204-02
+stud204-03
+stud204-03
+stud204-04
+stud204-04
+
+ gaspi_run -m ../gaspi/nodes -n 8 $GPI_BIN_DIR/gaspi_wrapper.sh $(pwd)/gaspi-hello
+Startup time: 0 sec
+Hello from rank 0 of 8
+Hello from rank 1 of 8
+Hello from rank 2 of 8
+Hello from rank 3 of 8
+Hello from rank 5 of 8
+Hello from rank 4 of 8
+Hello from rank 6 of 8
+Hello from rank 7 of 8
+
+
+# ------------------- Współpraca MPI i GASPI ---------------------
+
+# 6. Kod źródłowy programu wykorzystujący funkcje bibliotek
+#    zarówno MPI i GASPI:
+
+# a) Kompilacja:
+
+ mpicc source_mpi_gaspi.c -g -o prog_mpi_gaspi \
+       -I. -I${GPI_INC_DIR} -L${GPI_LIB_DIR} -lGPI2 -lpthread
+
+
+# b) Uruchomienie (pod kontrolą mpiexec):
+#    (Liczba węzłów w pliku konfiguracji klastra może być
+#     mniejsza od liczby uruchamianych procesów.)
+
+ mpiexec -f nodes -n 16 ./prog_mpi_gaspi
+Hello GASPI rank 1 of 16 and MPI rank 1 of 16
+Hello GASPI rank 9 of 16 and MPI rank 9 of 16
+Hello GASPI rank 3 of 16 and MPI rank 3 of 16
+Hello GASPI rank 11 of 16 and MPI rank 11 of 16
+Hello GASPI rank 4 of 16 and MPI rank 4 of 16
+Hello GASPI rank 12 of 16 and MPI rank 12 of 16
+Hello GASPI rank 0 of 16 and MPI rank 0 of 16
+Hello GASPI rank 8 of 16 and MPI rank 8 of 16
+Hello GASPI rank 7 of 16 and MPI rank 7 of 16
+Hello GASPI rank 15 of 16 and MPI rank 15 of 16
+Hello GASPI rank 5 of 16 and MPI rank 5 of 16
+Hello GASPI rank 13 of 16 and MPI rank 13 of 16
+Hello GASPI rank 2 of 16 and MPI rank 2 of 16
+Hello GASPI rank 10 of 16 and MPI rank 10 of 16
+Hello GASPI rank 6 of 16 and MPI rank 6 of 16
+Hello GASPI rank 14 of 16 and MPI rank 14 of 16
+
+
+# ---------------- Pakiety GaspiCxx i GaspiLS ------------------
+
+# 7. Dostępne są także dodatkowe biblioteki bazujące na GPI-2:
+#
+#   - GaspiCxx - a C++ interface for the GPI-2 library
+#     katalog: /opt/nfs/gaspicxx-1.1.0
+#
+#   - GaspiLS - a library of scalable, iterative linear solvers
+#     katalog: /opt/nfs/gaspils-30.05.22
+
+# --------------------------------------------------------------
