@@ -23,7 +23,16 @@ target_link_libraries(base_sprng INTERFACE base_mpi sprng)
 add_library(base_mpe INTERFACE)
 target_include_directories(base_mpe INTERFACE "/opt/nfs/mpe2-2.4.9b/include")
 target_link_directories(base_mpe INTERFACE "/opt/nfs/mpe2-2.4.9b/lib")
-target_link_libraries(base_mpe INTERFACE base_mpi X11)
+target_link_libraries(base_mpe INTERFACE base_mpi mpe X11)
+
+add_library(base_omp INTERFACE)
+target_compile_options(base_omp INTERFACE "-fopenmp")
+target_link_options(base_omp INTERFACE "-fopenmp")
+target_compile_definitions(base_omp INTERFACE "-DNUM_THREADS=4")
+
+add_library(base_upc INTERFACE)
+target_compile_options(base_upc INTERFACE "-bupc" "-network=udp" "-pthreads=4")
+set_target_properties(base_upc PROPERTIES C_COMPILER_LAUNCHER "/opt/nfs/berkeley_upc-2022.10.0/bin/upcc")  # doesnt work
 
 ####################################################################################################
 
@@ -74,3 +83,41 @@ target_link_libraries(lab5_E PRIVATE base_sprng)
 add_executable(lab6_A)
 target_sources(lab6_A PRIVATE "${PROJECT_SOURCE_DIR}/lab6/mpe_pi_X11.c")
 target_link_libraries(lab6_A PRIVATE base_mpe)
+
+####################################################################################################
+
+add_executable(lab7_A)
+target_sources(lab7_A PRIVATE "${PROJECT_SOURCE_DIR}/lab7/A/pi_sequential.c")
+target_link_libraries(lab7_A PRIVATE base_omp)
+
+add_executable(lab7_B)
+target_sources(lab7_B PRIVATE "${PROJECT_SOURCE_DIR}/lab7/B/pi_table.c")
+target_link_libraries(lab7_B PRIVATE base_omp)
+
+add_executable(lab7_C)
+target_sources(lab7_C PRIVATE "${PROJECT_SOURCE_DIR}/lab7/C/pi_critical.c")
+target_link_libraries(lab7_C PRIVATE base_omp)
+
+add_executable(lab7_D)
+target_sources(lab7_D PRIVATE "${PROJECT_SOURCE_DIR}/lab7/D/pi_reduction.c")
+target_link_libraries(lab7_D PRIVATE base_omp)
+
+add_executable(lab7_E)
+target_sources(lab7_E PRIVATE "${PROJECT_SOURCE_DIR}/lab7/E/pi_tasks.c")
+target_link_libraries(lab7_E PRIVATE base_omp)
+
+####################################################################################################
+
+add_executable(lab8)
+target_sources(lab8 PRIVATE "${PROJECT_SOURCE_DIR}/lab8/mc_pi_mpe.c")
+target_link_libraries(lab8 PRIVATE base_mpe)
+
+####################################################################################################
+
+# lab9
+
+####################################################################################################
+
+add_executable(lab10)
+target_sources(lab10 PRIVATE "${PROJECT_SOURCE_DIR}/lab10/upc-1-matmul.c")
+target_link_libraries(lab10 PRIVATE base_upc)
