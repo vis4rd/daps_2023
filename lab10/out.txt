@@ -1,0 +1,323 @@
+*** upcc running as: '-Wc,-O2 -network=udp -pthreads=4 upc-1-matmul.c -vvv'
+--------------------------------------------------------------------------------
+PREPROCESSING
+*** upcc running: '/usr/bin/gmake --no-print-directory -f /home/nfs/berkeley_upc-2022.10.0/opt/include/upcc.mak UPCR_HOME=/home/nfs/berkeley_upc-2022.10.0/opt EXTRA_CPPFLAGS="-D__BERKELEY_UPC_RUNTIME__=1 -D__BERKELEY_UPC_RUNTIME_RELEASE__=2022 -D__BERKELEY_UPC_RUNTIME_RELEASE_MINOR__=10 -D__BERKELEY_UPC_RUNTIME_RELEASE_PATCHLEVEL__=0 -D__BERKELEY_UPC_UDP_CONDUIT__=1 -D__UPC_ATOMIC__=1 -D__UPC_PUPC__=1 -D__UPC_IO__=2 -D__UPC_TICK__=1 -D__UPC_CASTABLE__=1 -D__UPC_NB__=1 -D__BERKELEY_UPC_PSHM__=1 -D__BERKELEY_UPC_PTHREADS__=1 -D__BERKELEY_UPC__=2022 -D__BERKELEY_UPC_MINOR__=10 -D__BERKELEY_UPC_PATCHLEVEL__=0 -DUPC_MAX_BLOCK_SIZE=1048576 -D__UPC__=1 -D__UPC_VERSION__=201311L -D__UPC_DYNAMIC_THREADS__=1 -I'/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10'  -D__BERKELEY_UPC_FIRST_PREPROCESS__=1" UPCPPP_INCLUDEDIRS=" -I '/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10'" DETECT_UPC_FLAGS="-v -t -T" UPCR_CONDUIT=udp UPCR_PARSEQ=par  PREPROCNAME='upc-1-matmul.c' ORIGNAME='upc-1-matmul.c' 'upc-1-matmul.i'' in /tmp/upcc-9kluczka-328144-1686392268 ***
+/home/nfs/berkeley_upc-2022.10.0/opt/libexec/upcppp -o 'upc-1-matmul.inc' -I /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude -I '/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10' 'upc-1-matmul.c'
+/usr/bin/gcc -E -D__BERKELEY_UPC_RUNTIME__=1 -D__BERKELEY_UPC_RUNTIME_RELEASE__=2022 -D__BERKELEY_UPC_RUNTIME_RELEASE_MINOR__=10 -D__BERKELEY_UPC_RUNTIME_RELEASE_PATCHLEVEL__=0 -D__BERKELEY_UPC_UDP_CONDUIT__=1 -D__UPC_ATOMIC__=1 -D__UPC_PUPC__=1 -D__UPC_IO__=2 -D__UPC_TICK__=1 -D__UPC_CASTABLE__=1 -D__UPC_NB__=1 -D__BERKELEY_UPC_PSHM__=1 -D__BERKELEY_UPC_PTHREADS__=1 -D__BERKELEY_UPC__=2022 -D__BERKELEY_UPC_MINOR__=10 -D__BERKELEY_UPC_PATCHLEVEL__=0 -DUPC_MAX_BLOCK_SIZE=1048576 -D__UPC__=1 -D__UPC_VERSION__=201311L -D__UPC_DYNAMIC_THREADS__=1 -I'/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10'  -D__BERKELEY_UPC_FIRST_PREPROCESS__=1 -D_GNU_SOURCE=1 -DGASNET_PAR -D_REENTRANT    -I/home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude -I/home/nfs/berkeley_upc-2022.10.0/opt/include -I/home/nfs/berkeley_upc-2022.10.0/opt/include/udp-conduit   -I/home/nfs/berkeley_upc-2022.10.0/opt/include -DUPCRI_SUPPORT_PTHREADS=1 -DUPCRI_UPC_PTHREADS=1   -I /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude  -std=gnu99 -D_GNU_SOURCE=1 -D__NO_STRING_INLINES -D__NO_MATH_INLINES -D__NO_INLINE__ -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 'upc-1-matmul.c' >'upc-1-matmul.ipre1'
+/usr/bin/perl -p -e 'BEGIN { print qq|# line 1 "<Berkeley UPC 2022.10.0>"\n|; } ' \
+          -e 'if (/^#(?:line)?\s*[0-9]+/) { s)\Q"upc-1-matmul.c")"upc-1-matmul.c"); s@//@/@g; }' \
+          'upc-1-matmul.ipre1'  > 'upc-1-matmul.ipre2'
+/home/nfs/berkeley_upc-2022.10.0/opt/libexec/detect-upc -v -t -T -i 'upc-1-matmul.inc' -o 'upc-1-matmul.i' 'upc-1-matmul.ipre2'
+entering /usr/include/stdc-predef.h
+  entering upc-1-matmul.c
+    entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_config.h
+    leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_config.h
+    entering /home/nfs/berkeley_upc-2022.10.0/opt/include/gasnet_portable_platform.h
+    leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/gasnet_portable_platform.h
+    entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc.h
+      entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc_types.h
+        entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stdint.h
+          entering /home/nfs/berkeley_upc-2022.10.0/opt/include/portable_inttypes.h
+            entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/inttypes.h
+            leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/inttypes.h
+          leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/portable_inttypes.h
+          entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h
+            entering /usr/include/stdint.h
+              entering /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+                entering /usr/include/features.h
+                  entering /usr/include/features-time64.h
+                    entering /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                    leaving /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                    entering /usr/include/x86_64-linux-gnu/bits/timesize.h
+                      entering /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                      leaving /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                    leaving /usr/include/x86_64-linux-gnu/bits/timesize.h
+                  leaving /usr/include/features-time64.h
+                  entering /usr/include/x86_64-linux-gnu/sys/cdefs.h
+                    entering /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                    leaving /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                    entering /usr/include/x86_64-linux-gnu/bits/long-double.h
+                    leaving /usr/include/x86_64-linux-gnu/bits/long-double.h
+                  leaving /usr/include/x86_64-linux-gnu/sys/cdefs.h
+                  entering /usr/include/x86_64-linux-gnu/gnu/stubs.h
+                    entering /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+                    leaving /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+                  leaving /usr/include/x86_64-linux-gnu/gnu/stubs.h
+                leaving /usr/include/features.h
+              leaving /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+              entering /usr/include/x86_64-linux-gnu/bits/types.h
+                entering /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                leaving /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                entering /usr/include/x86_64-linux-gnu/bits/timesize.h
+                  entering /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                  leaving /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                leaving /usr/include/x86_64-linux-gnu/bits/timesize.h
+                entering /usr/include/x86_64-linux-gnu/bits/typesizes.h
+                leaving /usr/include/x86_64-linux-gnu/bits/typesizes.h
+                entering /usr/include/x86_64-linux-gnu/bits/time64.h
+                leaving /usr/include/x86_64-linux-gnu/bits/time64.h
+              leaving /usr/include/x86_64-linux-gnu/bits/types.h
+              entering /usr/include/x86_64-linux-gnu/bits/wchar.h
+              leaving /usr/include/x86_64-linux-gnu/bits/wchar.h
+              entering /usr/include/x86_64-linux-gnu/bits/wordsize.h
+              leaving /usr/include/x86_64-linux-gnu/bits/wordsize.h
+              entering /usr/include/x86_64-linux-gnu/bits/stdint-intn.h
+              leaving /usr/include/x86_64-linux-gnu/bits/stdint-intn.h
+              entering /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h
+              leaving /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h
+            leaving /usr/include/stdint.h
+          leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h
+          entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/inttypes.h
+            entering /home/nfs/berkeley_upc-2022.10.0/opt/include/portable_inttypes.h
+            leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/portable_inttypes.h
+          leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/inttypes.h
+          entering /usr/include/inttypes.h
+          leaving /usr/include/inttypes.h
+          entering /usr/include/inttypes.h
+          leaving /usr/include/inttypes.h
+          entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/limits.h
+            entering /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h
+              entering /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h
+              leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h
+            leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h
+            entering /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h
+              entering /usr/include/limits.h
+                entering /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+                leaving /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+                entering /usr/include/x86_64-linux-gnu/bits/posix1_lim.h
+                  entering /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                  leaving /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                  entering /usr/include/x86_64-linux-gnu/bits/local_lim.h
+                    entering /usr/include/linux/limits.h
+                    leaving /usr/include/linux/limits.h
+                    entering /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h
+                    leaving /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h
+                  leaving /usr/include/x86_64-linux-gnu/bits/local_lim.h
+                leaving /usr/include/x86_64-linux-gnu/bits/posix1_lim.h
+                entering /usr/include/x86_64-linux-gnu/bits/posix2_lim.h
+                leaving /usr/include/x86_64-linux-gnu/bits/posix2_lim.h
+                entering /usr/include/x86_64-linux-gnu/bits/xopen_lim.h
+                  entering /usr/include/x86_64-linux-gnu/bits/uio_lim.h
+                  leaving /usr/include/x86_64-linux-gnu/bits/uio_lim.h
+                leaving /usr/include/x86_64-linux-gnu/bits/xopen_lim.h
+              leaving /usr/include/limits.h
+            leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h
+            entering /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h
+              entering /usr/include/limits.h
+              leaving /usr/include/limits.h
+            leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h
+            entering /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h
+              entering /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h
+              leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h
+            leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h
+            entering /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h
+            leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h
+          leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/limits.h
+        leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stdint.h
+        entering /home/nfs/berkeley_upc-2022.10.0/opt/include/gasnet_fwd.h
+        leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/gasnet_fwd.h
+      leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc_types.h
+      entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stddef.h
+        entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+        leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+        entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+        leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+      leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stddef.h
+      entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc_bits.h
+        entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc_types.h
+        leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc_types.h
+      leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc_bits.h
+      UPC CODE: upc_global_exit
+      entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stdlib.h
+        entering /usr/include/stdlib.h
+          entering /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+          leaving /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+          entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stddef.h
+            entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+            leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+            entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+            leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+          leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stddef.h
+          entering /usr/include/x86_64-linux-gnu/bits/waitflags.h
+          leaving /usr/include/x86_64-linux-gnu/bits/waitflags.h
+          entering /usr/include/x86_64-linux-gnu/bits/waitstatus.h
+          leaving /usr/include/x86_64-linux-gnu/bits/waitstatus.h
+          entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/bits/floatn.h
+          leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/bits/floatn.h
+          entering /usr/include/x86_64-linux-gnu/bits/types/locale_t.h
+            entering /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h
+            leaving /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h
+          leaving /usr/include/x86_64-linux-gnu/bits/types/locale_t.h
+          entering /usr/include/x86_64-linux-gnu/sys/types.h
+            entering /usr/include/x86_64-linux-gnu/bits/types/clock_t.h
+            leaving /usr/include/x86_64-linux-gnu/bits/types/clock_t.h
+            entering /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h
+            leaving /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h
+            entering /usr/include/x86_64-linux-gnu/bits/types/time_t.h
+            leaving /usr/include/x86_64-linux-gnu/bits/types/time_t.h
+            entering /usr/include/x86_64-linux-gnu/bits/types/timer_t.h
+            leaving /usr/include/x86_64-linux-gnu/bits/types/timer_t.h
+            entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stddef.h
+              entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+              leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+              entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+              leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+            leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stddef.h
+            entering /usr/include/endian.h
+              entering /usr/include/x86_64-linux-gnu/bits/endian.h
+                entering /usr/include/x86_64-linux-gnu/bits/endianness.h
+                leaving /usr/include/x86_64-linux-gnu/bits/endianness.h
+              leaving /usr/include/x86_64-linux-gnu/bits/endian.h
+              entering /usr/include/x86_64-linux-gnu/bits/byteswap.h
+              leaving /usr/include/x86_64-linux-gnu/bits/byteswap.h
+              entering /usr/include/x86_64-linux-gnu/bits/uintn-identity.h
+              leaving /usr/include/x86_64-linux-gnu/bits/uintn-identity.h
+            leaving /usr/include/endian.h
+            entering /usr/include/x86_64-linux-gnu/sys/select.h
+              entering /usr/include/x86_64-linux-gnu/bits/select.h
+              leaving /usr/include/x86_64-linux-gnu/bits/select.h
+              entering /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h
+                entering /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h
+                leaving /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h
+              leaving /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h
+              entering /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h
+              leaving /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h
+              entering /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h
+              leaving /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h
+            leaving /usr/include/x86_64-linux-gnu/sys/select.h
+            entering /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
+              entering /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
+                entering /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+                  entering /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                  leaving /usr/include/x86_64-linux-gnu/bits/wordsize.h
+                leaving /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+                entering /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
+                leaving /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
+                entering /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
+                leaving /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
+                entering /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
+                leaving /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
+              leaving /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
+            leaving /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
+          leaving /usr/include/x86_64-linux-gnu/sys/types.h
+          entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/alloca.h
+            entering /usr/include/alloca.h
+              entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stddef.h
+                entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+                leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+                entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+                leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+              leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stddef.h
+            leaving /usr/include/alloca.h
+          leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/alloca.h
+          entering /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
+          leaving /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
+          entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/bits/floatn.h
+          leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/bits/floatn.h
+        leaving /usr/include/stdlib.h
+      leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stdlib.h
+      entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/bupc_extensions.h
+      leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/bupc_extensions.h
+      entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/bupc_extensions.h
+        UPC CODE: shared/relaxed/strict
+        entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/inttypes.h
+          entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stdint.h
+            entering /home/nfs/berkeley_upc-2022.10.0/opt/include/portable_inttypes.h
+            leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/portable_inttypes.h
+          leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stdint.h
+        leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/inttypes.h
+        entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc_nb.h
+          UPC CODE: shared/relaxed/strict
+        leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc_nb.h
+      leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/bupc_extensions.h
+    leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc.h
+    entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stdio.h
+      entering /usr/include/stdio.h
+        entering /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+        leaving /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+        entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stddef.h
+          entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+          leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+          entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+          leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+        leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stddef.h
+        entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stdarg.h
+          entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h
+          leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h
+          entering /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h
+          leaving /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h
+        leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stdarg.h
+        entering /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h
+          entering /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h
+          leaving /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h
+        leaving /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h
+        entering /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h
+        leaving /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h
+        entering /usr/include/x86_64-linux-gnu/bits/types/__FILE.h
+        leaving /usr/include/x86_64-linux-gnu/bits/types/__FILE.h
+        entering /usr/include/x86_64-linux-gnu/bits/types/FILE.h
+        leaving /usr/include/x86_64-linux-gnu/bits/types/FILE.h
+        entering /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
+        leaving /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
+        entering /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h
+        leaving /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h
+        entering /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
+        leaving /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
+        entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/bits/floatn.h
+        leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/bits/floatn.h
+        entering /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/bits/floatn.h
+        leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/bits/floatn.h
+      leaving /usr/include/stdio.h
+    leaving /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude/stdio.h
+UPC FILES FOUND:
+    /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc.h
+    /usr/include/stdc-predef.h
+    upc-1-matmul.c
+    /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/bupc_extensions.h
+    /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc_nb.h
+    /tmp/upcc-9kluczka-328144-1686392268/upc-1-matmul.c
+added UPC pragma 'upc_code' to /usr/include/stdc-predef.h
+added UPC pragma 'upc_code' to upc-1-matmul.c
+added UPC pragma 'upc_code' to upc-1-matmul.c
+added UPC pragma 'upc_code' to upc-1-matmul.c
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc.h
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc.h
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc.h
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc.h
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc.h
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/bupc_extensions.h
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc.h
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/bupc_extensions.h
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/bupc_extensions.h
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc_nb.h
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/bupc_extensions.h
+added UPC pragma 'upc_code' to /home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_preinclude/upc.h
+added UPC pragma 'upc_code' to upc-1-matmul.c
+added UPC pragma 'upc_code' to upc-1-matmul.c
+*** upcc running: 'rm -f '/tmp/upcc-9kluczka-328144-1686392268/upc-1-matmul.c'' in /tmp/upcc-9kluczka-328144-1686392268 ***
+--------------------------------------------------------------------------------
+TRANSLATING
+*** upcc running: 'ulimit -v 524288  > /dev/null 2>&1 ; ulimit -d 524288  > /dev/null 2>&1 ; ulimit -m 524288  > /dev/null 2>&1 ;
+/opt/nfs/berkeley_upc_translator-2.28.4/targ/driver.nue/sgiupc -noinline -S -keep -Yf,/opt/nfs/berkeley_upc_translator-2.28.4/targ/gccfe -Yb,/opt/nfs/berkeley_upc_translator-2.28.4/targ/be  -show -v -fconfig-upcc-sizes 'upc-1-matmul.i'' in /tmp/upcc-9kluczka-328144-1686392268 ***
+*** upcc running: 'ulimit -v 524288  > /dev/null 2>&1 ; ulimit -d 524288  > /dev/null 2>&1 ; ulimit -m 524288  > /dev/null 2>&1 ;
+/opt/nfs/berkeley_upc_translator-2.28.4/targ/whirl2c/whirl2c -lang=upc -std=upc -pthreads -v -CLIST:emit_linedirs 'upc-1-matmul.i' '-fB,upc-1-matmul.N'' in /tmp/upcc-9kluczka-328144-1686392268 ***
+--------------------------------------------------------------------------------
+COMPILING
+*** upcc running: 'cp '/tmp/upcc-9kluczka-328144-1686392268/upc-1-matmul.trans.c' '/tmp/upcc-9kluczka-328144-1686392268/upc-1-matmul.o'' ***
+--------------------------------------------------------------------------------
+LINKING
+*** upcc running: 'rm -rf '/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10/a.out_pthread-link'' ***
+*** upcc running: 'cp '/tmp/upcc-9kluczka-328144-1686392268/upc-1-matmul.o' '/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10/a.out_pthread-link/upc-1-matmul_obj.c'' ***
+*** upcc running: '/usr/bin/gmake --no-print-directory' in /home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10/a.out_pthread-link ***
+cat 'upc-1-matmul_obj.tld' | sort -u -k 3,3rn -k 1,1 >global.tld
+echo '/* this comment avoids empty file warnings */' >>global.tld
+/usr/bin/gmake --no-print-directory -f /home/nfs/berkeley_upc-2022.10.0/opt/include/upcc.mak UPCR_HOME=/home/nfs/berkeley_upc-2022.10.0/opt \
+EXTRA_CFLAGS="-D_GNU_SOURCE=1 -v -O2"    \
+EXTRA_CPPFLAGS="-D__BERKELEY_UPC_RUNTIME__=1 -D__BERKELEY_UPC_RUNTIME_RELEASE__=2022 -D__BERKELEY_UPC_RUNTIME_RELEASE_MINOR__=10 -D__BERKELEY_UPC_RUNTIME_RELEASE_PATCHLEVEL__=0 -D__BERKELEY_UPC_UDP_CONDUIT__=1 -D__UPC_ATOMIC__=1 -D__UPC_PUPC__=1 -D__UPC_IO__=2 -D__UPC_TICK__=1 -D__UPC_CASTABLE__=1 -D__UPC_NB__=1 -D__BERKELEY_UPC_PSHM__=1 -D__BERKELEY_UPC_PTHREADS__=1 -D__BERKELEY_UPC__=2022 -D__BERKELEY_UPC_MINOR__=10 -D__BERKELEY_UPC_PATCHLEVEL__=0 -DUPC_MAX_BLOCK_SIZE=1048576 -D__UPC__=1 -D__UPC_VERSION__=201311L -D__UPC_DYNAMIC_THREADS__=1 -DUPCRI_USING_TLD -I'/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10' -I'/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10/a.out_pthread-link'" \
+UPCR_CONDUIT=udp UPCR_PARSEQ=par 'upc-1-matmul_obj.o'
+/usr/bin/gcc -O3 --param max-inline-insns-single=35000 --param inline-unit-growth=10000 --param large-function-growth=200000   -Wno-array-bounds -Wno-stringop-overflow -Wno-unused -Wunused-result -Wno-unused-parameter -Wno-address    -fno-strict-aliasing -fcommon -D_GNU_SOURCE=1 -v -O2 -D__BERKELEY_UPC_RUNTIME__=1 -D__BERKELEY_UPC_RUNTIME_RELEASE__=2022 -D__BERKELEY_UPC_RUNTIME_RELEASE_MINOR__=10 -D__BERKELEY_UPC_RUNTIME_RELEASE_PATCHLEVEL__=0 -D__BERKELEY_UPC_UDP_CONDUIT__=1 -D__UPC_ATOMIC__=1 -D__UPC_PUPC__=1 -D__UPC_IO__=2 -D__UPC_TICK__=1 -D__UPC_CASTABLE__=1 -D__UPC_NB__=1 -D__BERKELEY_UPC_PSHM__=1 -D__BERKELEY_UPC_PTHREADS__=1 -D__BERKELEY_UPC__=2022 -D__BERKELEY_UPC_MINOR__=10 -D__BERKELEY_UPC_PATCHLEVEL__=0 -DUPC_MAX_BLOCK_SIZE=1048576 -D__UPC__=1 -D__UPC_VERSION__=201311L -D__UPC_DYNAMIC_THREADS__=1 -DUPCRI_USING_TLD -I'/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10' -I'/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10/a.out_pthread-link' -D_GNU_SOURCE=1 -DGASNET_PAR -D_REENTRANT    -I/home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude -I/home/nfs/berkeley_upc-2022.10.0/opt/include -I/home/nfs/berkeley_upc-2022.10.0/opt/include/udp-conduit   -I/home/nfs/berkeley_upc-2022.10.0/opt/include -DUPCRI_SUPPORT_PTHREADS=1 -DUPCRI_UPC_PTHREADS=1   -I/home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_postinclude -D__BERKELEY_UPC_SECOND_PREPROCESS__=1 -DUPCRI_CC="/usr/bin/gcc" -DUPCRI_LD="/usr/bin/g@2B@2B"  -c 'upc-1-matmul_obj.c'
+*** upcc running '/usr/bin/nm /home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10/a.out_pthread-link/upc-1-matmul_obj.o'
+*** upcc running: '/usr/bin/gmake --no-print-directory -f /home/nfs/berkeley_upc-2022.10.0/opt/include/upcc.mak UPCR_HOME=/home/nfs/berkeley_upc-2022.10.0/opt UPCR_CONDUIT=udp UPCR_PARSEQ=par EXTRA_CPPFLAGS="-D__BERKELEY_UPC_RUNTIME__=1 -D__BERKELEY_UPC_RUNTIME_RELEASE__=2022 -D__BERKELEY_UPC_RUNTIME_RELEASE_MINOR__=10 -D__BERKELEY_UPC_RUNTIME_RELEASE_PATCHLEVEL__=0 -D__BERKELEY_UPC_UDP_CONDUIT__=1 -D__UPC_ATOMIC__=1 -D__UPC_PUPC__=1 -D__UPC_IO__=2 -D__UPC_TICK__=1 -D__UPC_CASTABLE__=1 -D__UPC_NB__=1 -D__BERKELEY_UPC_PSHM__=1 -D__BERKELEY_UPC_PTHREADS__=1 -D__BERKELEY_UPC__=2022 -D__BERKELEY_UPC_MINOR__=10 -D__BERKELEY_UPC_PATCHLEVEL__=0 -DUPC_MAX_BLOCK_SIZE=1048576 -D__UPC__=1 -D__UPC_VERSION__=201311L -D__UPC_DYNAMIC_THREADS__=1 -I'/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10/a.out_pthread-link' -DUPCRI_USING_TLD"  EXTRA_CFLAGS="-D_GNU_SOURCE=1 -v -O2" 'a.out_startup_tmp.o'' in /tmp/upcc-9kluczka-328144-1686392268 ***
+/usr/bin/gcc -O3 --param max-inline-insns-single=35000 --param inline-unit-growth=10000 --param large-function-growth=200000   -Wno-array-bounds -Wno-stringop-overflow -Wno-unused -Wunused-result -Wno-unused-parameter -Wno-address    -fno-strict-aliasing -fcommon -D_GNU_SOURCE=1 -v -O2 -D__BERKELEY_UPC_RUNTIME__=1 -D__BERKELEY_UPC_RUNTIME_RELEASE__=2022 -D__BERKELEY_UPC_RUNTIME_RELEASE_MINOR__=10 -D__BERKELEY_UPC_RUNTIME_RELEASE_PATCHLEVEL__=0 -D__BERKELEY_UPC_UDP_CONDUIT__=1 -D__UPC_ATOMIC__=1 -D__UPC_PUPC__=1 -D__UPC_IO__=2 -D__UPC_TICK__=1 -D__UPC_CASTABLE__=1 -D__UPC_NB__=1 -D__BERKELEY_UPC_PSHM__=1 -D__BERKELEY_UPC_PTHREADS__=1 -D__BERKELEY_UPC__=2022 -D__BERKELEY_UPC_MINOR__=10 -D__BERKELEY_UPC_PATCHLEVEL__=0 -DUPC_MAX_BLOCK_SIZE=1048576 -D__UPC__=1 -D__UPC_VERSION__=201311L -D__UPC_DYNAMIC_THREADS__=1 -I'/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10/a.out_pthread-link' -DUPCRI_USING_TLD -D_GNU_SOURCE=1 -DGASNET_PAR -D_REENTRANT    -I/home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_geninclude -I/home/nfs/berkeley_upc-2022.10.0/opt/include -I/home/nfs/berkeley_upc-2022.10.0/opt/include/udp-conduit   -I/home/nfs/berkeley_upc-2022.10.0/opt/include -DUPCRI_SUPPORT_PTHREADS=1 -DUPCRI_UPC_PTHREADS=1   -I/home/nfs/berkeley_upc-2022.10.0/opt/include/upcr_postinclude -D__BERKELEY_UPC_SECOND_PREPROCESS__=1 -DUPCRI_CC="/usr/bin/gcc" -DUPCRI_LD="/usr/bin/g@2B@2B"  -c 'a.out_startup_tmp.c'
+*** upcc running: '/usr/bin/gmake --no-print-directory -f /home/nfs/berkeley_upc-2022.10.0/opt/include/upcc.mak UPCR_HOME=/home/nfs/berkeley_upc-2022.10.0/opt UPCR_CONDUIT=udp UPCR_PARSEQ=par OBJS="'/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10/a.out_pthread-link/upc-1-matmul_obj.o' '/tmp/upcc-9kluczka-328144-1686392268/a.out_startup_tmp.o'" EXTRA_LDFLAGS="  -v" OUT="a.out"' ***
+/usr/bin/g++  -o 'a.out' '/home/stud2019/9kluczka/AGH/systemy_rownolegle/labs/lab10/a.out_pthread-link/upc-1-matmul_obj.o' '/tmp/upcc-9kluczka-328144-1686392268/a.out_startup_tmp.o' -O2  -Wno-array-bounds -Wno-stringop-overflow -Wno-unused -Wunused-result -Wno-unused-parameter -Wno-address       -v -L/home/nfs/berkeley_upc-2022.10.0/opt/lib -lupcr-udp-par -lumalloc -L/home/nfs/berkeley_upc-2022.10.0/opt/lib -lgasnet-udp-par  -lamudp     -lpthread -L/usr/lib/gcc/x86_64-linux-gnu/11 -lgcc -lm    

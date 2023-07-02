@@ -1,0 +1,69 @@
+# ================================================================
+#
+#     WFiIS - laboratorium programowania równoległego UPC
+#
+# ================================================================
+
+#      Uruchamianie aplikacji Berkeley UPC + GasNET (UDP, MPICH)
+#      na stacjach w pracowni komputerowej 204 (D-10).
+
+
+# ------------- Przygotowanie środowiska  ------------------------
+
+# 1. Załadować zmienne środowiskowe do bieżącej powłoki Bash.
+#    skrypt dla pakietu Berkeley UPC i kompilatora GNU UPC:
+
+ source /opt/nfs/config/source_bupc_2022.10.sh
+
+
+# ------------- Kompilacja translatorem UPC-to-C -----------------
+
+# 2. Skompilować program UPC za pomocą translatorem BUPC
+#    z wykorzystaniem środowiska komunikacyjnego Berkeley GasNET
+#    (transport UDP) (domyślnie: 4 wątki UPC / proces):
+
+ upcc -bupc -network=udp -pthreads=4 source.upc -o program_upc
+
+#  . Skompilować program UPC za pomocą translatorem GNU UPC
+#    z wykorzystaniem środowiska komunikacyjnego Berkeley GasNET
+#    (transport UDP) (domyślnie: 4 wątki UPC / proces):
+
+ upcc -gupc -Wc,"-fPIE" -network=udp -pthreads=4 source.upc -o program_upc
+
+
+# ------------------- Wykonanie programu -------------------------
+
+# 3. Przygotować plik z listą dostępnych węzłów, np. "nodes":
+
+ /opt/nfs/config/station204_name_list.sh 1 16 > nodes
+
+# 4. Uruchomić skompilowany program pod kontrolą środowiska
+#    Berkeley UPC/GasNET:
+#    - plik z listą węzłów: nodes
+#    - liczba wątków / proces (-c), np.: 4
+#    - liczba węzłów (-N), np.: 12
+#    - liczba wątków (-n) "n" = "c" x "N": 48
+
+ UPC_NODEFILE=nodes upcrun -shared-heap 256M -c 4 -N 12 -n 48 ./program_upc <args>
+
+
+# ----------------------------------------------------------------
+
+# 5. Przykładowe uruchomienie programu:
+
+ UPC_NODEFILE=nodes upcrun -c 4 -N 12 -n 48 ./cpi_lab 100000
+UPCR: UPC threads 12..15 of 48 on stud204-01 (pshm node  3 of 12, process  3 of 12, pid=4061)
+UPCR: UPC threads 32..35 of 48 on stud204-11 (pshm node  8 of 12, process  8 of 12, pid=3215)
+UPCR: UPC threads  8..11 of 48 on stud204-05 (pshm node  2 of 12, process  2 of 12, pid=3146)
+UPCR: UPC threads 24..27 of 48 on stud204-14 (pshm node  6 of 12, process  6 of 12, pid=2726)
+UPCR: UPC threads  0.. 3 of 48 on stud204-04 (pshm node  0 of 12, process  0 of 12, pid=2171)
+UPCR: UPC threads 28..31 of 48 on stud204-13 (pshm node  7 of 12, process  7 of 12, pid=2733)
+UPCR: UPC threads 44..47 of 48 on stud204-03 (pshm node 11 of 12, process 11 of 12, pid=2469)
+UPCR: UPC threads  4.. 7 of 48 on stud204-10 (pshm node  1 of 12, process  1 of 12, pid=3433)
+UPCR: UPC threads 16..19 of 48 on stud204-06 (pshm node  4 of 12, process  4 of 12, pid=2304)
+UPCR: UPC threads 20..23 of 48 on stud204-12 (pshm node  5 of 12, process  5 of 12, pid=2795)
+UPCR: UPC threads 36..39 of 48 on stud204-15 (pshm node  9 of 12, process  9 of 12, pid=2709)
+UPCR: UPC threads 40..43 of 48 on stud204-16 (pshm node 10 of 12, process 10 of 12, pid=2370)
+Approx:  3.14159265358979400 Error:     0.00000000000000089
+
+# ----------------------------------------------------------------
