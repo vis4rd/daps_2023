@@ -1,0 +1,77 @@
+# ========================================================
+#
+#   WFiIS - laboratorium programowania równoległego CUDA
+#
+# ========================================================
+
+#   Uruchamianie aplikacji CUDA na stacjach stud...
+#      w pracowni komputerowej 204 (D-10).
+
+
+# ----------------- TEST CUDA SOFTWARE -----------------------------
+
+# 0. Uruchomić skrypt testujący środowisko CUDA:
+
+/opt/nfs/cuda-test/cuda_check.sh
+
+
+# 00. Uruchomić program testujący akcelerator GPU:
+
+/opt/nfs/cuda-test/deviceQuery.sh
+
+
+# ------------- Przygotowanie środowiska  --------------------------
+
+# 1. Załadować zmienne środowiskowe do bieżącej powłoki Bash.
+#    Przykład - skrypt dla pakietu CUDA 11.7:
+
+ source /opt/nfs/config/source_cuda.sh
+
+ nvcc -V
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2022 NVIDIA Corporation
+Built on Wed_Jun__8_16:49:14_PDT_2022
+Cuda compilation tools, release 11.7, V11.7.99
+Build cuda_11.7.r11.7/compiler.31442593_0
+
+
+# 2. Utworzyć link do katalogu wspólnych plików nagłówkowych:
+
+ ln -s /opt/nfs/cuda-test/cuda-samples/Common
+
+# 3. Utworzyć lokalny katalog dla plików źródłowych:
+
+ mkdir -p Samples/src
+
+# ---------- Wybór i kompilacja przykładu  -------------------------
+
+# 4. Skopiować wybrany katalog przykładów do w/w katalogu.
+#    Przykład - program testujący parametry akceleratora:
+
+ cp -r /opt/nfs/cuda-test/cuda-samples/Samples/1_Utilities/deviceQuery Samples/src
+
+# 5. Przejść do podkatalogu z kodem źródłowym i skompilować program (SM arch. 7.5)
+#    Przykład - program testujący parametry akceleratora:
+
+ cd Samples/src/deviceQuery
+ make SMS=75
+
+# 6. Uruchomić skompilowany program:
+
+ make run
+
+# ------------ Usunięcie żródeł przykładu  -------------------------
+
+# 7. Opcjonalne: skasować podkatalog przykładu.
+#    Przykład - program testujący parametry akceleratora:
+
+ cd ../../..
+ rm -fr Samples/src/deviceQuery
+
+# Skompilowane programy pozostają dostępne w podkatalogu
+# bin/x86_64/linux/release:
+
+ ls -l bin/x86_64/linux/release
+-rwxr-xr-x 1 user group  825896 mar 16 16:51 deviceQuery
+
+# ------------------------------------------------------------------

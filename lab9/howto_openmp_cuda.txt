@@ -1,0 +1,54 @@
+# =========================================================
+#
+#  WFiIS - laboratorium programowania równoległego OpenMP4
+#
+# =========================================================
+
+#   Uruchamianie aplikacji "OpenMP 4 with CUDA offload"
+#   z wykorzystaniem kompilatora Clang 17.0
+#   na stacjach w pracowni komputerowej 204 (D-10).
+
+
+# ------------- Przygotowanie środowiska  -----------------------
+
+# 1. Załadować zmienne środowiskowe do bieżącej powłoki Bash.
+#    Przykład - skrypt dla pakietu CUDA:
+
+ source /opt/nfs/config/source_cuda.sh
+ source /opt/nfs/config/source_clang170.sh
+
+# -------------- Kompilacja kompilatorem Clang  -----------------
+
+# 2. Skompilować program C/C++ za pomocą kompilatora Clang
+#    z przekierowaniem obliczeń sterowanych klauzulami
+#    OpenMP 4.0 na akcelerator GPU zgodny z Nvidia CUDA:
+
+ clang -fopenmp -fopenmp-targets=nvptx64-nvidia-cuda \
+         	    --cuda-path=/usr/local/cuda-11.7 \
+		    source_omp4.c -o program_omp4_gpu
+
+# -------------- Wykonanie programu na GPU  ---------------------
+
+# 3. Uruchomić skompilowany program pod kontrolą profiler'a
+#    Nvidia "nvprof", w celu zweryfikowania przekierowania
+#    obliczeń na akcelerator GPU Nvidia/CUDA:
+
+ nvprof ./program_omp4_gpu
+
+# ---------------------------------------------------------------
+
+# 4. Profiler output:
+
+
+(...)
+==2077== Profiling application: ./program_omp4_gpu
+==2077== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   48.61%  225.86us         1  225.86us  225.86us  225.86us  __omp_offloading_27_19c2dbf_main_l85
+                   47.38%  220.14us         1  220.14us  220.14us  220.14us  __omp_offloading_27_19c2dbf_main_l129
+                    1.83%  8.5120us         6  1.4180us     864ns  1.8240us  [CUDA memcpy DtoH]
+                    1.41%  6.5600us         1  6.5600us  6.5600us  6.5600us  __omp_offloading_27_19c2dbf_main_l76
+                    0.77%  3.5840us         3  1.1940us  1.1520us  1.2800us  [CUDA memcpy HtoD]
+(...)
+
+# ------------------------------------------------------------------

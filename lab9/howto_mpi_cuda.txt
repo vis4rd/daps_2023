@@ -1,0 +1,131 @@
+# ==================================================================
+#
+#      WFiIS - laboratorium programowania równoległego MPI/CUDA
+#
+# ==================================================================
+
+#   Uruchamianie aplikacji hybrydowych MPI+CUDA na stacjach stud...
+#           w pracowni komputerowej 204 (D-10).
+
+
+# ------------- Przygotowanie środowiska  --------------------------
+
+# 1. Załadować zmienne środowiskowe do bieżącej powłoki Bash.
+#    Dla pakietu Open-MPI (4.1.5) i CUDA (11.7)
+
+ source /opt/nfs/config/source_openmpi415.sh
+ source /opt/nfs/config/source_cuda.sh
+
+
+# ----------------  Kompilacja przykładu  --------------------------
+
+# 2. Rozpakować archiwum z programem Jacobi:
+
+ tar zxvf /opt/nfs/cuda-test/samples/jacobi_lab.tar.gz
+ cd jacobi
+ ls -l
+
+# 3. Kompilacja kodu programu - dwie wersje: z obsługą bezpośredniej
+#    komunikacji CUDA device -> MPI i za pośrednictwem pamięci hosta:
+
+ make
+ ls -l jacobi_*
+
+
+# ----------------  Uruchomienie przykładu  ------------------------
+
+# 4. Ustalenie listy dostępnych węzłów (z akceleratorami GPU Nvidia):
+
+ /opt/nfs/config/station204_name_list.sh 1 16 > nodes
+ cat nodes
+
+# 5. Uruchomienie programu w wersji "MPI CUDA aware" - po jednym
+#    procesie (rank) na węzeł/akcelerator:
+#    (liczba procesów MPI musi być równa iloczynowi wymiarów 2D)
+
+ mpiexec -x LD_LIBRARY_PATH --prefix /opt/nfs/openmpi-4.1.5     \
+   -n 8 --hostfile nodes --map-by node ./jacobi_cuda_aware_mpi  \
+   -t 4 2 -d 2048 2048
+
+# 6. Uruchomienie programu w wersji "MPI CUDA normal" - po jednym
+#    procesie (rank) na węzeł/akcelerator:
+#    (liczba procesów MPI musi być równa iloczynowi wymiarów 2D)
+
+ mpiexec -x LD_LIBRARY_PATH --prefix /opt/nfs/openmpi-4.1.5     \
+   -n 8 --hostfile nodes --map-by node ./jacobi_cuda_normal_mpi \
+   -t 4 2 -d 2048 2048
+
+# ------------------------------------------------------------------
+
+# 7. Uruchomienie programu w wersji "MPI CUDA aware" - po cztery
+#    procesy MPI (rank) (4-core CPU) na węzeł/akcelerator:
+#    (liczba procesów MPI musi być równa iloczynowi wymiarów 2D)
+
+ mpiexec -x LD_LIBRARY_PATH --prefix /opt/nfs/openmpi-4.1.5     \
+   -n 8 --hostfile nodes --map-by core ./jacobi_cuda_aware_mpi  \
+   -t 4 2 -d 2048 2048
+
+# 8. Uruchomienie programu w wersji "MPI CUDA normal" - pocztery
+#    procesy MPI (rank) (4-core CPU) na węzeł/akcelerator:
+#    (liczba procesów MPI musi być równa iloczynowi wymiarów 2D)
+
+ mpiexec -x LD_LIBRARY_PATH --prefix /opt/nfs/openmpi-4.1.5     \
+   -n 8 --hostfile nodes --map-by core ./jacobi_cuda_normal_mpi \
+   -t 4 2 -d 2048 2048
+
+
+# --------  Usunięcie skompilowanego kodu  przykładu  --------------
+
+# 9. Ocjonalne: usunięcie plików wykonywalnych i obiektowych.
+
+ make clean
+ ls
+
+# --------------  Analiza kodu źródłowego MPI+CUDA  ----------------
+
+// ====== Host.c: ================
+
+void InitializeDataChunk( // ...
+                          real * devSideEdges[2], // ...
+                        )
+{
+ // ...
+         SafeCudaCall(cudaMalloc((void **)&devSideEdges[i], sideLineBytes));
+         SafeCudaCall(cudaMemset(devSideEdges[i], 0, sideLineBytes));
+ // ...
+}
+
+
+double TransferAllHalos(MPI_Comm cartComm, // ...
+                        real * devSideEdges[2], real * devHaloLines[2], // ...
+                       )
+{
+ // ...
+        // Exchange data with the left and right neighbors
+        ExchangeHalos(cartComm, devSideEdges[order.x], hostSendLines[1],
+                hostRecvLines[1], devHaloLines[order.x], xNeighbors[order.x], domSize->y);
+        ExchangeHalos(cartComm, devSideEdges[1 - order.x], hostSendLines[1],
+                hostRecvLines[1], devHaloLines[1 - order.x], xNeighbors[1 - order.x], domSize->y);
+ // ...
+}
+
+// ====== CUDA_Aware_MPI.c: ======
+
+void ExchangeHalos(MPI_Comm cartComm, real * devSend, real * hostSend, real * hostRecv, real * devRecv, int neighbor, int elemCount)
+{
+ //...
+   MPI_Sendrecv(devSend, elemCount, MPI_CUSTOM_REAL, neighbor, 0, // ...
+ // ...
+}
+
+// ====== CUDA_Normal_MPI.c: =====
+
+void ExchangeHalos(MPI_Comm cartComm, real * devSend, real * hostSend, real * hostRecv, real * devRecv, int neighbor, int elemCount)
+{
+ //...
+   SafeCudaCall(cudaMemcpy(hostSend, devSend, byteCount, cudaMemcpyDeviceToHost));
+   MPI_Sendrecv(hostSend, elemCount, MPI_CUSTOM_REAL, neighbor, 0, // ...
+ // ...
+}
+
+# ---------------------------------------------------------------------
